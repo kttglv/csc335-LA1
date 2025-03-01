@@ -1,5 +1,9 @@
-package model;
+package frontend;
 
+import backend.MusicStore; // To reference the MusicStore class
+import backend.LibraryModel;
+import backend.Song;
+import backend.PlayList;
 import java.util.List;
 import java.util.Scanner;
 
