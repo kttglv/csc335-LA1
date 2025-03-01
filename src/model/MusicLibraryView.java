@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MusicLibraryView {
+	
     private MusicStore musicStore;
     private LibraryModel libraryModel;
     private Scanner scanner;
@@ -14,18 +15,23 @@ public class MusicLibraryView {
      * @param libraryModel The LibraryModel instance to manage the user's library.
      */
     public MusicLibraryView(MusicStore musicStore, LibraryModel libraryModel) {
+    	
         this.musicStore = musicStore;
         this.libraryModel = libraryModel;
         this.scanner = new Scanner(System.in);
+        
     }
 
     /**
      * Starts the main loop of the application, displaying the menu and handling user input.
      */
     public void start() {
+    	
         while (true) {
+        	
             displayMainMenu();
             String choice = scanner.nextLine().trim();
+            
             switch (choice) {
                 case "1": searchMusicStore(); break;
                 case "2": searchLibrary(); break;
@@ -66,10 +72,13 @@ public class MusicLibraryView {
         System.out.println("c. Album by Title");
         System.out.println("d. Album by Artist");
         System.out.print("Enter choice: ");
+        
         String option = scanner.nextLine().trim().toLowerCase();
         System.out.print("Enter search term: ");
+        
         String term = scanner.nextLine().trim();
         List<?> results;
+        
         switch (option) {
             case "a":
                 results = musicStore.searchSongsByTitle(term);
@@ -96,6 +105,7 @@ public class MusicLibraryView {
      * Handles searching the user's library for songs, albums, or playlists.
      */
     private void searchLibrary() {
+    	
         System.out.println("Search Library:");
         System.out.println("a. Song by Title");
         System.out.println("b. Song by Artist");
@@ -107,6 +117,7 @@ public class MusicLibraryView {
         System.out.print("Enter search term: ");
         String term = scanner.nextLine().trim();
         List<?> results;
+        
         switch (option) {
             case "a":
                 results = libraryModel.searchSongsByTitleInLibrary(term);
@@ -144,23 +155,32 @@ public class MusicLibraryView {
      * Adds a song or album from the music store to the user's library.
      */
     private void addToLibrary() {
+    	
         System.out.println("Add to Library:");
         System.out.println("1. Add Song");
         System.out.println("2. Add Album");
+        
         System.out.print("Enter choice: ");
         String choice = scanner.nextLine().trim();
+        
         System.out.print("Enter title: ");
         String title = scanner.nextLine().trim();
+        
         System.out.print("Enter artist: ");
         String artist = scanner.nextLine().trim();
+        
         boolean success;
+        
         if (choice.equals("1")) {
+        	
             success = libraryModel.addSong(title, artist);
             System.out.println(success ? "Song added to library." : "Song not found in music store.");
         } else if (choice.equals("2")) {
+        	
             success = libraryModel.addAlbum(title, artist);
             System.out.println(success ? "Album added to library." : "Album not found in music store.");
         } else {
+        	
             System.out.println("Invalid choice.");
         }
     }
@@ -169,15 +189,19 @@ public class MusicLibraryView {
      * Retrieves and displays various lists from the user's library.
      */
     private void getListsFromLibrary() {
+    	
         System.out.println("Get Lists from Library:");
         System.out.println("1. Song Titles");
         System.out.println("2. Artists");
         System.out.println("3. Albums");
         System.out.println("4. Playlists");
         System.out.println("5. Favorite Songs");
+        
         System.out.print("Enter choice: ");
         String choice = scanner.nextLine().trim();
+        
         List<String> list;
+        
         switch (choice) {
             case "1":
                 list = libraryModel.getSongTitles();
@@ -213,18 +237,22 @@ public class MusicLibraryView {
      * Manages playlists by creating new ones or modifying existing ones.
      */
     private void managePlaylists() {
+    	
         System.out.println("Manage Playlists:");
         System.out.println("1. Create Playlist");
         System.out.println("2. Add Song to Playlist");
         System.out.println("3. Remove Song from Playlist");
         System.out.print("Enter choice: ");
         String choice = scanner.nextLine().trim();
+        
         if (choice.equals("1")) {
+        	
             System.out.print("Enter playlist name: ");
             String name = scanner.nextLine().trim();
             libraryModel.createPlaylist(name);
             System.out.println("Playlist created.");
         } else if (choice.equals("2")) {
+        	
             System.out.print("Enter playlist name: ");
             String playlistName = scanner.nextLine().trim();
             System.out.print("Enter song title: ");
@@ -234,6 +262,7 @@ public class MusicLibraryView {
             boolean success = libraryModel.addSongToPlaylist(playlistName, songTitle, artist);
             System.out.println(success ? "Song added to playlist." : "Failed to add song. Playlist or song not found.");
         } else if (choice.equals("3")) {
+        	
             System.out.print("Enter playlist name: ");
             String playlistName = scanner.nextLine().trim();
             System.out.print("Enter song title: ");
@@ -243,6 +272,7 @@ public class MusicLibraryView {
             boolean success = libraryModel.removeSongFromPlaylist(playlistName, songTitle, artist);
             System.out.println(success ? "Song removed from playlist." : "Failed to remove song. Playlist or song not found.");
         } else {
+        	
             System.out.println("Invalid choice.");
         }
     }
@@ -253,8 +283,10 @@ public class MusicLibraryView {
     private void markSongAsFavorite() {
         System.out.print("Enter song title: ");
         String title = scanner.nextLine().trim();
+        
         System.out.print("Enter artist: ");
         String artist = scanner.nextLine().trim();
+        
         libraryModel.markFavorite(title, artist);
         System.out.println("Song marked as favorite.");
     }
@@ -265,17 +297,23 @@ public class MusicLibraryView {
     private void rateSong() {
         System.out.print("Enter song title: ");
         String title = scanner.nextLine().trim();
+        
         System.out.print("Enter artist: ");
         String artist = scanner.nextLine().trim();
+        
         System.out.print("Enter rating (1-5): ");
         String ratingStr = scanner.nextLine().trim();
+        
         try {
+        	
             int rating = Integer.parseInt(ratingStr);
             libraryModel.rateSong(title, artist, rating);
             System.out.println("Song rated.");
         } catch (NumberFormatException e) {
+        	
             System.out.println("Invalid rating. Please enter a number between 1 and 5.");
         } catch (IllegalArgumentException e) {
+        	
             System.out.println(e.getMessage());
         }
     }
@@ -286,6 +324,7 @@ public class MusicLibraryView {
      * @param noResultsMessage The message to display if the results list is empty.
      */
     private void displayResults(List<?> results, String noResultsMessage) {
+    	
         if (results.isEmpty()) {
             System.out.println(noResultsMessage);
         } else {
