@@ -1,4 +1,4 @@
-package model;
+package backend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,10 +89,14 @@ public class LibraryModel {
         }
     }
 
-    public void markFavorite(String title, String artist) {
+    public void toggleFavorite(String title, String artist) {
+    	
     	
         Song song = getSongFromLibrary(title, artist);
-        if (song != null) favorites.add(song);
+        
+        if (song != null & !favorites.contains(song)) favorites.add(song);
+        
+        else if (song != null & favorites.contains(song)) favorites.remove(song);
         
     }
 

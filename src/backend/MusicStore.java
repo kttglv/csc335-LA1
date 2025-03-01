@@ -1,4 +1,4 @@
-package model;
+package backend;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -40,7 +40,7 @@ public class MusicStore {
                 	
                     String title = parts[0].trim();
                     String artist = parts[1].trim();
-                    String filename = title.replaceAll("\\s+", "_") + "_" + artist.replaceAll("\\s+", "_") + ".txt";
+                    String filename = title + "_" + artist + ".txt";
                     
                     loadAlbum(filename, title, artist);
                     

@@ -1,5 +1,8 @@
-package model;
+package tests;
 
+import backend.Album;
+import backend.Song;
+import backend.PlayList;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import org.junit.jupiter.api.Test;

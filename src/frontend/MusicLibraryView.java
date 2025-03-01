@@ -1,5 +1,9 @@
-package model;
+package frontend;
 
+import backend.MusicStore; // To reference the MusicStore class
+import backend.LibraryModel;
+import backend.Song;
+import backend.PlayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -287,7 +291,7 @@ public class MusicLibraryView {
         System.out.print("Enter artist: ");
         String artist = scanner.nextLine().trim();
         
-        libraryModel.markFavorite(title, artist);
+        libraryModel.toggleFavorite(title, artist);
         System.out.println("Song marked as favorite.");
     }
 

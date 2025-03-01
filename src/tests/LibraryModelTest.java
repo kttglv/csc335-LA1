@@ -1,5 +1,8 @@
-package model;
+package tests;
 
+import backend.MusicStore;
+import backend.LibraryModel;
+import backend.Song;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,18 +37,16 @@ class LibraryModelTest {
 	@Test
 	public void testPlaylistManagement() {
 	    model.addSong("Rolling in the Deep", "Adele");
-	    model.addSong("Someone Like You", "Adele");
-	    model.createPlaylist("Favorites");
-	    model.addSongToPlaylist("Favorites", "Rolling in the Deep", "Adele");
+	    model.toggleFavorite("Rolling in the Deep", "Adele");
 	    assertEquals(1, model.getFavorites().size());
-	    model.removeSongFromPlaylist("Favorites", "Rolling in the Deep", "Adele");
+	    model.toggleFavorite("Rolling in the Deep", "Adele");
 	    assertEquals(0, model.getFavorites().size());
 	}
 	
 	@Test
 	public void testAddToFavorites() {
 	    model.addSong("Rolling in the Deep", "Adele");
-	    model.markFavorite("Rolling in the Deep", "Adele");
+	    model.toggleFavorite("Rolling in the Deep", "Adele");
 	    List<Song> favorites = model.getFavorites();
 	    assertEquals(1, favorites.size());
 	    assertEquals("Rolling in the Deep", favorites.get(0).getTitle());

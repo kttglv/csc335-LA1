@@ -1,4 +1,4 @@
-package model;
+package backend;
 
 public class Song {
 	

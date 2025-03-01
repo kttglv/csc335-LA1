@@ -1,5 +1,7 @@
-package model;
+package tests;
 
+import backend.Album;
+import backend.Song;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
