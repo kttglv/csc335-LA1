@@ -287,7 +287,7 @@ public class MusicLibraryView {
         System.out.print("Enter artist: ");
         String artist = scanner.nextLine().trim();
         
-        libraryModel.markFavorite(title, artist);
+        libraryModel.toggleFavorite(title, artist);
         System.out.println("Song marked as favorite.");
     }
 
