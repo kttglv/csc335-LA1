@@ -10,40 +10,29 @@ import java.util.List;
 import java.util.Map;
 
 public class MusicStore {
-	
     private Map<String, List<Album>> albumsByTitle;
     private Map<String, List<Album>> albumsByArtist;
     private Map<String, List<Song>> songsByTitle;
     private Map<String, List<Song>> songsByArtist;
 
     public MusicStore() {
-    	
         albumsByTitle = new HashMap<>();
         albumsByArtist = new HashMap<>();
         songsByTitle = new HashMap<>();
         songsByArtist = new HashMap<>();
         loadData();
-        
     }
 
     private void loadData() {
-    	
         try (BufferedReader reader = new BufferedReader(new FileReader("albums.txt"))) {
-        	
             String line;
-            
             while ((line = reader.readLine()) != null) {
-            	
                 String[] parts = line.split(",\\s*");
-                
                 if (parts.length == 2) {
-                	
                     String title = parts[0].trim();
                     String artist = parts[1].trim();
                     String filename = title + "_" + artist + ".txt";
-                    
                     loadAlbum(filename, title, artist);
-                    
                 }
             }
         } catch (IOException e) {
@@ -52,41 +41,26 @@ public class MusicStore {
     }
 
     private void loadAlbum(String filename, String title, String artist) {
-    	
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-        	
             String firstLine = reader.readLine();
-            
             if (firstLine != null) {
-            	
                 String[] parts = firstLine.split(",\\s*");
-                
                 if (parts.length == 4) {
-                	
                     String albumTitle = parts[0].trim();
                     String albumArtist = parts[1].trim();
                     String genre = parts[2].trim();
                     int year = Integer.parseInt(parts[3].trim());
-                    
                     Album album = new Album(albumTitle, albumArtist, genre, year);
-
                     albumsByTitle.computeIfAbsent(albumTitle, k -> new ArrayList<>()).add(album);
                     albumsByArtist.computeIfAbsent(albumArtist, k -> new ArrayList<>()).add(album);
-
                     String songLine;
-                    
                     while ((songLine = reader.readLine()) != null) {
-                    	
                         String songTitle = songLine.trim();
-                        
                         if (!songTitle.isEmpty()) {
-                        	
                             Song song = new Song(songTitle, album);
                             album.addSong(song);
-                            
                             songsByTitle.computeIfAbsent(songTitle, k -> new ArrayList<>()).add(song);
                             songsByArtist.computeIfAbsent(albumArtist, k -> new ArrayList<>()).add(song);
-                            
                         }
                     }
                 }

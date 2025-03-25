@@ -1,13 +1,13 @@
 package frontend;
 
 import backend.MusicStore;
-import backend.LibraryModel;
+import backend.UserManager;
 
 public class MusicLibraryApp {
     public static void main(String[] args) {
         MusicStore store = new MusicStore();
-        LibraryModel model = new LibraryModel(store);
-        MusicLibraryView view = new MusicLibraryView(store, model);
+        UserManager userManager = new UserManager();
+        MusicLibraryView view = new MusicLibraryView(store, userManager);
         view.start();
     }
 }
