@@ -1,7 +1,6 @@
 package backend;
 
 public class Song {
-	
     private String title;
     private Album album;
 
