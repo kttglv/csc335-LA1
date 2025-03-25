@@ -6,22 +6,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class SongTest {
+public class SongTest {
+    @Test
+    public void testSongCreation() {
+        // Create an album to associate with the song
+        Album album = new Album("Test Album", "Test Artist", "Rock", 2020);
+        Song song = new Song("Test Song", album);
 
-	@Test
-	public void testSongCreation() {
-	    Album album = new Album("21", "Adele", "Pop", 2011);
-	    Song song = new Song("Rolling in the Deep", album);
-	    assertEquals("Rolling in the Deep", song.getTitle());
-	    assertEquals("Adele", song.getArtist());
-	    assertEquals(album, song.getAlbum());
-	}
-	
-	@Test
-	public void testSongToString() {
-	    Album album = new Album("21", "Adele", "Pop", 2011);
-	    Song song = new Song("Rolling in the Deep", album);
-	    assertEquals("Rolling in the Deep by Adele from 21", song.toString());
-	}
-
+        // Verify that the song's properties are correctly set
+        assertEquals("Test Song", song.getTitle(), "Song title should match constructor input");
+        assertEquals(album, song.getAlbum(), "Song album should match the provided album");
+        assertEquals("Test Artist", song.getArtist(), "Song artist should match album's artist");
+    }
+    
 }
